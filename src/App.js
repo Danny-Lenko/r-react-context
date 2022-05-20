@@ -1,5 +1,6 @@
-import React, {Component} from "react";
+import React, {Component} from "react"
 import Header from './Header'
+import {UserContextConsumer} from "./userContext";
 
 class App extends Component {
 
@@ -17,16 +18,26 @@ class App extends Component {
 
             <div className="app">
                 <Header />
-                <main>
-                    <p>No new notifications, username 🎉</p>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        value={this.state.value}
-                        onChange={this.onChange}
-                    />
-                    <button>Change Username</button>
-                </main>
+
+                <UserContextConsumer>
+                    {context => (
+                        <main>
+                            <p>No new notifications, {context.username} 🎉</p>
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={this.state.value}
+                                onChange={this.onChange}
+                            />
+                            <button
+                                onClick={() => context.changeUsername(this.state.username)}
+                            >
+                                Change Username
+                            </button>
+                        </main>
+                    )}
+                </UserContextConsumer>
+
             </div>
         )
     }

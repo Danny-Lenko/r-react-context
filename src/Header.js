@@ -1,17 +1,16 @@
-import React, {Component} from "react";
+import React from "react"
+import {UserContextConsumer} from "./userContext";
 
-class Header extends Component {
-
-    render() {
-
-        return(
-
-            <header>
-                <p>Welcome, username</p>
-            </header>
-
-        )
-    }
+function Header() {
+    return(
+        <UserContextConsumer>
+            {context => (
+                <header>
+                    <p>Welcome, {context.username}</p>
+                </header>
+            )}
+        </UserContextConsumer>
+    )
 }
 
 export default Header
